@@ -3,54 +3,54 @@
 # Vidya Khansa Mizan | 2509116052 | Sistem Informasi B 2025
 
 ## Deskripsi Program
-Sistem Pengelolaan Layanan Perawatan Hewan adalah sebuah program berbasis bahasa pemrograman Java yang digunakan untuk mengelola data layanan perawatan hewan secara sederhana. Program ini merupakan pengembangan lanjutan dari Mini Project 3, dengan tambahan integrasi database MySQL menggunakan JDBC dan DAO, sehingga data layanan tidak lagi disimpan sementara di ArrayList, melainkan tersimpan secara permanen dan tetap tersedia walaupun program ditutup dan dibuka kembali. Program ini berfokus pada layanan perawatan kebersihan dan penampilan hewan, yaitu Perawatan (mandi, potong kuku, perawatan bulu) dan Penitipan (jasa menitipkan hewan selama jangka waktu tertentu). Program ini memungkinkan pengguna untuk melakukan CRUD (Create, Read, Update, Delete) terhadap data layanan tersebut, dengan seluruh data tersimpan di database MySQL bernama `db_kyapetcare`.
+Sistem Pengelolaan Layanan Perawatan Hewan adalah sebuah program berbasis bahasa pemrograman Java yang digunakan untuk mengelola data layanan perawatan hewan secara sederhana. Program ini berfokus pada layanan perawatan kebersihan dan penampilan hewan, yaitu Perawatan (mandi, potong kuku, perawatan bulu) dan Penitipan (jasa menitipkan hewan selama jangka waktu tertentu). Program ini memungkinkan pengguna untuk melakukan CRUD (Create, Read, Update, Delete) sederhana terhadap data layanan tersebut.
 
 ## Struktur Package
 
-[GAMBAR: struktur package project di NetBeans]
+<img width="188" height="379" alt="image" src="https://github.com/user-attachments/assets/72e3ec80-80c0-4313-bb32-9f281f53bfda" />
 
-Program ini terbagi ke dalam beberapa package dengan tanggung jawab masing-masing:
+Program ini terbagi ke dalam beberapa package yang masing-masingnya terdiri dari:
 
 **1. main**\
-Berisi class `KyaPetCareMinpro4.java`, yaitu class utama atau entry point program. Class ini hanya memanggil satu method, yaitu `jalankan()` dari class `CRUDKyaPetCare.java`, sehingga seluruh alur menu dan logika program terpusat di satu tempat.
+Berisi class 'KyaPetCareMinpro4.java', yaitu class utama atau entry point program. Class ini hanya memanggil satu method, yaitu 'jalankan()' dari class 'CRUDKyaPetCare.java', sehingga seluruh alur menu dan logika program terpusat di satu tempat.
 
 **2. model**\
-Berisi class-class entitas (OOP murni) yang merepresentasikan data layanan:
-- `Layanan.java` — abstract class (superclass) yang menyimpan informasi umum layanan, seperti ID layanan, nama layanan, catatan untuk petugas, harga, serta data hewan terkait (nama hewan, nama pemilik, jenis hewan, umur hewan). Class ini menerapkan constructor, getter, setter dengan validasi, encapsulation, serta memiliki satu abstract method yaitu `getKategori()`.
-- `Evalutable.java` — interface yang mendeklarasikan method `hitungDiskon()`, diimplementasikan oleh `Perawatan` dan `Penitipan` dengan aturan diskon berbeda.
-- `Perawatan.java` — subclass dari `Layanan`, implements `Evalutable`, digunakan untuk data layanan perawatan kebersihan dan penampilan hewan (Mandi, Potong Kuku, atau Bulu).
-- `Penitipan.java` — subclass dari `Layanan`, implements `Evalutable`, menambahkan atribut khusus `lamaPenitipan`, digunakan untuk data layanan jasa menitipkan hewan.
+Berisi class-class entitas yang merepresentasikan data layanan:
+- 'Layanan.java' — abstract class (superclass) yang menyimpan informasi umum layanan, seperti ID layanan, nama layanan, catatan untuk petugas, harga, serta data hewan terkait (nama hewan, nama pemilik, jenis hewan, umur hewan). Class ini menerapkan constructor, getter, setter dengan validasi, encapsulation, serta memiliki satu abstract method yaitu 'getKategori()'.
+- 'Evalutable.java' — interface yang mendeklarasikan method 'hitungDiskon()', diimplementasikan oleh 'Perawatan' dan 'Penitipan' dengan aturan diskon berbeda.
+- 'Perawatan.java' — subclass dari 'Layanan', implements 'Evalutable', digunakan untuk data layanan perawatan kebersihan dan penampilan hewan (Mandi, Potong Kuku, atau Bulu).
+- 'Penitipan.java' — subclass dari 'Layanan', implements 'Evalutable', menambahkan atribut khusus 'lamaPenitipan'', digunakan untuk data layanan jasa menitipkan hewan.
 
 **3. model.dao**\
-Berisi class `LayananDAO.java`, yaitu Data Access Object yang bertugas menjembatani objek Java (`Layanan`, `Perawatan`, `Penitipan`) dengan tabel `layanan` di database MySQL. Seluruh proses simpan, baca, ubah, dan hapus data ke database dilakukan melalui class ini menggunakan `PreparedStatement`.
+Berisi class 'LayananDAO.java', yaitu Data Access Object yang bertugas menjembatani objek Java ('Layanan', 'Perawatan', 'Penitipan') dengan tabel 'layanan' di database MySQL. Seluruh proses simpan, baca, ubah, dan hapus data ke database dilakukan melalui class ini menggunakan 'PreparedStatement'.
 
 **4. config**\
-Berisi class `Koneksi.java`, yang bertugas membuka dan menyediakan koneksi ke database MySQL (`db_kyapetcare`) menggunakan JDBC.
+Berisi class 'Koneksi.java', yang bertugas membuka dan menyediakan koneksi ke database MySQL ('db_kyapetcare') menggunakan JDBC.
 
 **5. Controller**\
 Berisi class yang menangani validasi dan proses CRUD:
-- `CekKyaPetCare.java` — menangani validasi seluruh input dari pengguna, seperti validasi angka, validasi angka harus lebih dari 0, validasi string tidak boleh kosong, validasi pilihan menu, validasi jawaban ya atau tidak, serta validasi ID dengan opsi pembatalan jika input dikosongkan.
-- `CRUDKyaPetCare.java` — menangani proses CRUD pada program sekaligus menjalankan alur menu utama melalui method `jalankan()`. Class ini memanggil `LayananDAO` untuk setiap proses tambah, tampil, update, dan hapus data, bukan lagi menyimpan data di ArrayList.
+- 'CekKyaPetCare.java' — menangani validasi seluruh input dari pengguna, seperti validasi angka, validasi angka harus lebih dari 0, validasi string tidak boleh kosong, validasi pilihan menu, validasi jawaban ya atau tidak, serta validasi ID dengan opsi pembatalan jika input dikosongkan.
+- 'CRUDKyaPetCare.java' — menangani proses CRUD pada program sekaligus menjalankan alur menu utama melalui method 'jalankan()'. Class ini memanggil 'LayananDAO' untuk setiap proses tambah, tampil, update, dan hapus data, bukan lagi menyimpan data di ArrayList.
 
 **6. View**\
-Berisi class `Menu.java`, yang menampilkan tampilan menu utama program ke layar.
+Berisi class 'Menu.java', yang menampilkan tampilan menu utama program ke layar.
 
-Dengan struktur ini, pembagian MVC yang sudah dibangun sejak Minpro 2 dan Minpro 3 tetap dipertahankan, dengan tambahan dua package baru (`model.dao` dan `config`) khusus untuk menangani koneksi dan akses database, tanpa mencampurkan logika database ke dalam class model OOP murni (`Layanan`, `Perawatan`, `Penitipan`).
+Dengan struktur ini, pembagian MVC yang sudah dibangun sejak Minpro 2 dan Minpro 3 tetap dipertahankan, dengan tambahan dua package baru ('model.dao' dan 'config') khusus untuk menangani koneksi dan akses database, tanpa mencampurkan logika database ke dalam class model ('Layanan', 'Perawatan', 'Penitipan').
 
 ## Penerapan Encapsulation dan Inheritance
 
 ### Encapsulation
-Encapsulation diterapkan pada seluruh class di package model, yaitu class Layanan, Perawatan, Penitipan.
+Encapsulation diterapkan pada seluruh class di package model, yaitu class 'Layanan', 'Perawatan', 'Penitipan'.
 
-[GAMBAR: potongan kode atribut private/protected di Layanan.java]
+<img width="181" height="108" alt="image" src="https://github.com/user-attachments/assets/0ea0dd63-bd3b-4fb5-9776-e819a104db43" />
 
-Seperti yang dapat dilihat pada gambar di atas, seluruh atribut yang berada di dalam class Layanan, yang nantinya akan diturunkan ke subclass, dibuat menjadi protected. Sehingga data tidak dapat diakses langsung dari luar class. Untuk atribut id dibuat menjadi private final, sehingga hanya bisa diisi sekali lewat constructor dan tidak memiliki setter.
+Seperti yang dapat dilihat pada gambar di atas, seluruh atribut yang berada di dalam class 'Layanan', yang nantinya akan diturunkan ke subclass, dibuat menjadi protected. Sehingga data tidak dapat diakses langsung dari luar class. Untuk atribut id dibuat menjadi private final, sehingga hanya bisa diisi sekali lewat constructor dan tidak memiliki setter.
 
-[GAMBAR: potongan kode getter]
+<img width="206" height="44" alt="image" src="https://github.com/user-attachments/assets/0f45fb62-6322-431f-aaf4-bc0f60e7567d" />
 
-[GAMBAR: potongan kode setter dengan validasi]
+<img width="479" height="80" alt="image" src="https://github.com/user-attachments/assets/638348b5-df3c-45a6-9d90-27505551a8a8" />
 
-Setiap atribut yang boleh diubah memiliki getter dan setter, sehingga perubahan data hanya bisa dilakukan lewat method yang sudah disediakan. Hal ini berlaku untuk semua atribut kecuali atribut id. Setiap setter juga sudah dilengkapi validasi, sehingga jika ada nilai yang tidak sesuai (misalnya string kosong atau angka negatif/nol), setter akan menolak nilai tersebut dengan melempar IllegalArgumentException.
+Setiap atribut yang boleh diubah memiliki getter dan setter, sehingga perubahan data hanya bisa dilakukan lewat method yang sudah disediakan. Hal ini berlaku untuk semua atribut kecuali atribut id. Setiap setter juga sudah dilengkapi validasi, sehingga jika ada nilai yang tidak sesuai (misalnya string kosong atau angka negatif/nol), setter akan menolak nilai tersebut dengan melempar 'IllegalArgumentException'.
 
 ### Inheritance
 Inheritance diterapkan pada class yang berada di package model.
