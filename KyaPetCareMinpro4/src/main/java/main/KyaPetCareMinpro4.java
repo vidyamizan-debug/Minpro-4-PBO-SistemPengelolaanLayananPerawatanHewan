@@ -2,7 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package com.mycompany.kyapetcareminpro4;
+package main;
+import Controller.CRUDKyaPetCare;
 
 /**
  *
@@ -11,6 +12,7 @@ package com.mycompany.kyapetcareminpro4;
 public class KyaPetCareMinpro4 {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        CRUDKyaPetCare crud = new CRUDKyaPetCare();
+        crud.jalankan();
     }
 }
