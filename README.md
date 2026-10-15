@@ -45,7 +45,7 @@ Encapsulation diterapkan pada seluruh class di package model, yaitu class 'Layan
 Seperti yang dapat dilihat pada gambar di atas, seluruh atribut yang berada di dalam class 'Layanan', yang nantinya akan diturunkan ke subclass, dibuat menjadi protected. Sehingga data tidak dapat diakses langsung dari luar class. Untuk atribut id dibuat menjadi private final, sehingga hanya bisa diisi sekali lewat constructor dan tidak memiliki setter.
 
 <img width="206" height="44" alt="image" src="https://github.com/user-attachments/assets/0f45fb62-6322-431f-aaf4-bc0f60e7567d" />
-
+<br><br>
 <img width="479" height="80" alt="image" src="https://github.com/user-attachments/assets/638348b5-df3c-45a6-9d90-27505551a8a8" />
 
 Setiap atribut yang boleh diubah memiliki getter dan setter, sehingga perubahan data hanya bisa dilakukan lewat method yang sudah disediakan. Hal ini berlaku untuk semua atribut kecuali atribut id. Setiap setter juga sudah dilengkapi validasi, sehingga jika ada nilai yang tidak sesuai (misalnya string kosong atau angka negatif/nol), setter akan menolak nilai tersebut dengan melempar 'IllegalArgumentException'.
@@ -58,7 +58,7 @@ Inheritance diterapkan pada class yang berada di package model.
 Seperti yang dapat dilihat pada gambar di atas, class 'Layanan' merupakan superclass yang menyimpan atribut umum ('idLayanan', 'namaLayanan', 'catatan', 'harga') beserta data hewan terkait ('namaHewan', 'namaPemilik', 'jenisHewan', 'umurHewan').
 
 <img width="679" height="68" alt="image" src="https://github.com/user-attachments/assets/67fc6356-9bf6-4864-817e-2cfa3d522894" />
-
+<br><br>
 <img width="676" height="95" alt="image" src="https://github.com/user-attachments/assets/c7d9d34c-f941-432c-b6d2-15ca06547692" />
 
 Kedua gambar di atas menunjukkan bahwa class 'Perawatan' dan 'Penitipan' merupakan subclass yang menggunakan "extends Layanan", sehingga mewarisi seluruh atribut dan method dari 'Layanan', ditambah atribut khusus milik 'Penitipan', yaitu 'lamaPenitipan'. Kedua subclass tersebut memanggil constructor superclass menggunakan super(...) untuk mengisi atribut umum sebelum mengisi atribut khususnya sendiri.
@@ -70,9 +70,9 @@ Berikut ini ialah penerapan kedua jenis polymorphism yang saya gunakan:
 ### Override
 
 <img width="399" height="146" alt="image" src="https://github.com/user-attachments/assets/69552095-e6de-47d0-a814-77080f4cb310" />
-
+<br><br>
 <img width="382" height="73" alt="image" src="https://github.com/user-attachments/assets/aafaf86e-0205-485b-ba03-a1a7e922233e" />
-
+<br><br>
 <img width="419" height="83" alt="image" src="https://github.com/user-attachments/assets/0de04121-1879-4910-892a-d02e35714e42" />
 
 Salah satu penerapan Override adalah method 'tampilkanInfo()' yang ada di superclass Layanan di-override oleh subclass 'Perawatan' dan 'Penitipan'. Masing-masing subclass memanggil 'super.tampilkanInfo()' terlebih dahulu untuk menampilkan info umum, lalu menambahkan baris info khusus miliknya sendiri (diskon untuk 'Perawatan', lama penitipan dan diskon untuk 'Penitipan'). Dengan begitu, meskipun dipanggil dengan cara yang sama, hasil tampilannya berbeda tergantung jenis objeknya.
@@ -92,9 +92,9 @@ Berikut ini ialah penerapan abstraction yang saya gunakan:
 Class 'Layanan' dideklarasikan sebagai abstract class, sehingga tidak dapat dibuat objeknya secara langsung (tidak bisa menulis new Layanan(...)). Hal ini memastikan setiap objek yang dibuat harus berupa subclass yang jelas jenisnya, yaitu 'Perawatan' atau 'Penitipan'.
 
 <img width="230" height="18" alt="image" src="https://github.com/user-attachments/assets/ef02cd13-6039-4186-a0e8-28f011b2a5ea" />
-
+<br><br>
 <img width="185" height="54" alt="image" src="https://github.com/user-attachments/assets/a30f76a8-998f-4e3b-9fec-eb69c5248a41" />
-
+<br><br>
 <img width="180" height="59" alt="image" src="https://github.com/user-attachments/assets/ef509c20-d0b6-4883-a9a2-8c98fcbbd957" />
 
 Class 'Layanan' memiliki satu abstract method, yaitu 'getKategori()', yang tidak memiliki isi di superclass dan wajib diisi oleh setiap subclass. Class 'Perawatan' mengembalikan nilai "Perawatan" dan class 'Penitipan' mengembalikan nilai "Penitipan". Method ini kemudian dipanggil di dalam 'tampilkanInfo()' milik 'Layanan', sehingga superclass tidak perlu tahu detail bagaimana kategori ditentukan, cukup tahu bahwa method tersebut pasti tersedia di setiap subclass-nya.
@@ -105,32 +105,36 @@ Pada Minpro 4 ini, program yang sebelumnya menyimpan data di ArrayList (sehingga
 
 ### Koneksi Database
 
-[GAMBAR: potongan kode Koneksi.java]
+<img width="497" height="299" alt="image" src="https://github.com/user-attachments/assets/c48b7466-af4c-4320-b645-90fe57fcfd1e" />
 
-Class Koneksi.java pada package config bertugas membuka koneksi ke database menggunakan DriverManager.getConnection(), dengan URL, username, dan password yang sudah ditentukan. Jika driver MySQL tidak ditemukan atau koneksi gagal, class ini akan melempar SQLException yang kemudian ditangani oleh Controller.
+Class 'Koneksi.java' pada package config bertugas membuka koneksi ke database menggunakan 'DriverManager.getConnection()', dengan URL, username, dan password yang sudah ditentukan. Jika driver MySQL tidak ditemukan atau koneksi gagal, class ini akan melempar SQLException yang kemudian ditangani oleh Controller.
 
 ### Data Access Object (DAO)
 
-[GAMBAR: potongan kode LayananDAO.java - method tambah]
-
-Class LayananDAO.java pada package model.dao menjadi perantara antara objek Layanan (beserta subclass-nya) dengan tabel layanan di database. Seluruh perintah SQL (INSERT, SELECT, UPDATE, DELETE) di class ini menggunakan PreparedStatement, bukan Statement biasa, agar nilai yang dimasukkan pengguna diikat sebagai parameter (bukan digabung langsung ke teks query), sehingga lebih aman dari celah SQL Injection.
+Class 'LayananDAO.java' pada package 'model.dao' menjadi perantara antara objek Layanan (beserta subclass-nya) dengan tabel layanan di database. Seluruh perintah SQL (INSERT, SELECT, UPDATE, DELETE) di class ini menggunakan PreparedStatement, bukan Statement biasa, agar nilai yang dimasukkan pengguna diikat sebagai parameter (bukan digabung langsung ke teks query), sehingga lebih aman dari celah SQL Injection.
 
 Setiap method pada LayananDAO dirancang untuk satu tugas spesifik:
-- tambah(Layanan layanan) — menjalankan query INSERT, mengembalikan ID baru yang dibuat otomatis oleh database (AUTO_INCREMENT).
-- tampilkanSemua() — menjalankan query SELECT seluruh data, lalu mengembalikannya sebagai ArrayList of Layanan.
-- cariById(int id) — menjalankan query SELECT berdasarkan id_layanan, digunakan saat update dan hapus data.
-- update(Layanan layanan) — menjalankan query UPDATE berdasarkan id_layanan.
-- hapus(int id) — menjalankan query DELETE berdasarkan id_layanan.
-
-[GAMBAR: potongan kode buatObjek() yang mengubah ResultSet menjadi objek Perawatan/Penitipan]
+- 'tambah(Layanan layanan)' — menjalankan query INSERT, mengembalikan ID baru yang dibuat otomatis oleh database (AUTO_INCREMENT).
+- 'tampilkanSemua()' — menjalankan query SELECT seluruh data, lalu mengembalikannya sebagai ArrayList of Layanan.
+- 'cariById(int id)' — menjalankan query SELECT berdasarkan id_layanan, digunakan saat update dan hapus data.
+- 'update(Layanan layanan)' — menjalankan query UPDATE berdasarkan id_layanan.
+- 'hapus(int id)' — menjalankan query DELETE berdasarkan id_layanan.
 
 Setiap kali DAO membaca baris dari database (lewat ResultSet), data tersebut diubah kembali menjadi objek Perawatan atau Penitipan sesuai kolom kategori pada tabel, sehingga seluruh struktur OOP (abstract class, inheritance, polymorphism, interface Evalutable) yang sudah dibangun tetap digunakan sepenuhnya, walaupun sumber datanya kini berasal dari database, bukan lagi ArrayList di memori.
 
 ### Integrasi ke Controller
 
-[GAMBAR: potongan kode CRUDKyaPetCare.java yang memanggil LayananDAO]
+<img width="625" height="218" alt="image" src="https://github.com/user-attachments/assets/a4cac5ff-65b2-4021-b282-4e0802243c2c" />
+<br><br>
+<img width="425" height="97" alt="image" src="https://github.com/user-attachments/assets/bb10ea26-2d93-43dd-88e5-cd7bc8a4fc57" />
+<br><br>
+<img width="558" height="191" alt="image" src="https://github.com/user-attachments/assets/819c08a9-ef61-4c90-bef1-00ac633595b3" />
+<br><br>
+<img width="247" height="26" alt="image" src="https://github.com/user-attachments/assets/5632b3e6-df0f-4a27-951e-025afa3e81d7" />
+<br><br>
+<img width="566" height="341" alt="image" src="https://github.com/user-attachments/assets/c49fe256-5f77-43bd-b94a-dc559568d9b6" />
 
-Pada class CRUDKyaPetCare.java, setiap method CRUD (tambahLayanan, tampilkanLayanan, updateLayanan, hapusLayanan) memanggil method yang sesuai di LayananDAO, kemudian hasil atau kemungkinan error-nya ditangani menggunakan blok try-catch untuk SQLException. Jika terjadi kegagalan koneksi atau query, program tidak akan menampilkan notifikasi keberhasilan, melainkan pesan error yang sesuai, sehingga tidak ada data yang dianggap berhasil tersimpan padahal sebenarnya gagal.
+Pada class 'CRUDKyaPetCare.java', setiap method CRUD ('tambahLayanan', 'tampilkanLayanan', 'updateLayanan', 'hapusLayanan') memanggil method yang sesuai di 'LayananDAO', kemudian hasil atau kemungkinan error-nya ditangani menggunakan blok try-catch untuk SQLException. Jika terjadi kegagalan koneksi atau query, program tidak akan menampilkan notifikasi keberhasilan, melainkan pesan error yang sesuai, sehingga tidak ada data yang dianggap berhasil tersimpan padahal sebenarnya gagal.
 
 ## Alur Program
 Alur program dimulai ketika program dijalankan melalui class `KyaPetCareMinpro4.java`, yang langsung memanggil method `jalankan()` pada class `CRUDKyaPetCare.java`. Program akan menampilkan menu utama yang berisi beberapa pilihan, yaitu Tambah Data Layanan, Tampilkan Data Layanan, Update Data Layanan, Hapus Data Layanan, dan Keluar.
