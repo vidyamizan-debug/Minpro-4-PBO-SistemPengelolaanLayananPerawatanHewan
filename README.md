@@ -37,9 +37,7 @@ Berisi class 'Menu.java', yang menampilkan tampilan menu utama program ke layar.
 
 Dengan struktur ini, pembagian MVC yang sudah dibangun sejak Minpro 2 dan Minpro 3 tetap dipertahankan, dengan tambahan dua package baru ('model.dao' dan 'config') khusus untuk menangani koneksi dan akses database, tanpa mencampurkan logika database ke dalam class model ('Layanan', 'Perawatan', 'Penitipan').
 
-## Penerapan Encapsulation dan Inheritance
-
-### Encapsulation
+## Encapsulation
 Encapsulation diterapkan pada seluruh class di package model, yaitu class 'Layanan', 'Perawatan', 'Penitipan'.
 
 <img width="181" height="108" alt="image" src="https://github.com/user-attachments/assets/0ea0dd63-bd3b-4fb5-9776-e819a104db43" />
@@ -52,7 +50,7 @@ Seperti yang dapat dilihat pada gambar di atas, seluruh atribut yang berada di d
 
 Setiap atribut yang boleh diubah memiliki getter dan setter, sehingga perubahan data hanya bisa dilakukan lewat method yang sudah disediakan. Hal ini berlaku untuk semua atribut kecuali atribut id. Setiap setter juga sudah dilengkapi validasi, sehingga jika ada nilai yang tidak sesuai (misalnya string kosong atau angka negatif/nol), setter akan menolak nilai tersebut dengan melempar 'IllegalArgumentException'.
 
-### Inheritance
+## Inheritance
 Inheritance diterapkan pada class yang berada di package model.
 
 <img width="207" height="124" alt="image" src="https://github.com/user-attachments/assets/c03d94bd-2fd4-411d-a7b5-1276674cc91c" />
@@ -65,43 +63,45 @@ Seperti yang dapat dilihat pada gambar di atas, class 'Layanan' merupakan superc
 
 Kedua gambar di atas menunjukkan bahwa class 'Perawatan' dan 'Penitipan' merupakan subclass yang menggunakan "extends Layanan", sehingga mewarisi seluruh atribut dan method dari 'Layanan', ditambah atribut khusus milik 'Penitipan', yaitu 'lamaPenitipan'. Kedua subclass tersebut memanggil constructor superclass menggunakan super(...) untuk mengisi atribut umum sebelum mengisi atribut khususnya sendiri.
 
-## Penerapan Polymorphism dan Abstraction
+## Polymorphism 
 
-Berikut ini ialah penerapan kedua jenis polymorphism dan abstraction yang saya gunakan:
+Berikut ini ialah penerapan kedua jenis polymorphism yang saya gunakan:
 
 ### Override
 
-[GAMBAR: potongan kode tampilkanInfo() di Layanan.java]
+<img width="399" height="146" alt="image" src="https://github.com/user-attachments/assets/69552095-e6de-47d0-a814-77080f4cb310" />
 
-[GAMBAR: potongan kode tampilkanInfo() di Perawatan.java]
+<img width="382" height="73" alt="image" src="https://github.com/user-attachments/assets/aafaf86e-0205-485b-ba03-a1a7e922233e" />
 
-[GAMBAR: potongan kode tampilkanInfo() di Penitipan.java]
+<img width="419" height="83" alt="image" src="https://github.com/user-attachments/assets/0de04121-1879-4910-892a-d02e35714e42" />
 
-Salah satu penerapan Override adalah method tampilkanInfo() yang ada di superclass Layanan di-override oleh subclass Perawatan dan Penitipan. Masing-masing subclass memanggil super.tampilkanInfo() terlebih dahulu untuk menampilkan info umum, lalu menambahkan baris info khusus miliknya sendiri (diskon untuk Perawatan, lama penitipan dan diskon untuk Penitipan). Dengan begitu, meskipun dipanggil dengan cara yang sama, hasil tampilannya berbeda tergantung jenis objeknya.
+Salah satu penerapan Override adalah method 'tampilkanInfo()' yang ada di superclass Layanan di-override oleh subclass 'Perawatan' dan 'Penitipan'. Masing-masing subclass memanggil 'super.tampilkanInfo()' terlebih dahulu untuk menampilkan info umum, lalu menambahkan baris info khusus miliknya sendiri (diskon untuk 'Perawatan', lama penitipan dan diskon untuk 'Penitipan'). Dengan begitu, meskipun dipanggil dengan cara yang sama, hasil tampilannya berbeda tergantung jenis objeknya.
 
 ### Overload
 
-[GAMBAR: potongan kode cetakStatus() dua versi]
+<img width="486" height="95" alt="image" src="https://github.com/user-attachments/assets/2eac2472-2abf-422b-a5e1-4ee0767248dd" />
 
-Salah satu penerapan Overload ialah method cetakStatus() pada class Layanan yang memiliki dua versi, yaitu tanpa parameter (menampilkan status "Layanan Aktif") dan dengan parameter String (menampilkan status "Layanan Aktif" ditambah catatan tertentu, misalnya "Dapat Diskon").
+Salah satu penerapan Overload ialah method 'cetakStatus()' pada class Layanan yang memiliki dua versi, yaitu tanpa parameter (menampilkan status "Layanan Aktif") dan dengan parameter String (menampilkan status "Layanan Aktif" ditambah catatan tertentu, misalnya "Dapat Diskon").
 
-### Abstraction
+## Abstraction
 
-[GAMBAR: potongan kode "public abstract class Layanan"]
+Berikut ini ialah penerapan abstraction yang saya gunakan:
 
-Class Layanan dideklarasikan sebagai abstract class, sehingga tidak dapat dibuat objeknya secara langsung (tidak bisa menulis new Layanan(...)). Hal ini memastikan setiap objek yang dibuat harus berupa subclass yang jelas jenisnya, yaitu Perawatan atau Penitipan.
+<img width="197" height="13" alt="image" src="https://github.com/user-attachments/assets/e53e23d5-57be-4dc3-aa56-bd2517d1844f" />
 
-[GAMBAR: potongan kode "public abstract String getKategori();"]
+Class 'Layanan' dideklarasikan sebagai abstract class, sehingga tidak dapat dibuat objeknya secara langsung (tidak bisa menulis new Layanan(...)). Hal ini memastikan setiap objek yang dibuat harus berupa subclass yang jelas jenisnya, yaitu 'Perawatan' atau 'Penitipan'.
 
-[GAMBAR: potongan kode implementasi getKategori() di Perawatan]
+<img width="230" height="18" alt="image" src="https://github.com/user-attachments/assets/ef02cd13-6039-4186-a0e8-28f011b2a5ea" />
 
-[GAMBAR: potongan kode implementasi getKategori() di Penitipan]
+<img width="185" height="54" alt="image" src="https://github.com/user-attachments/assets/a30f76a8-998f-4e3b-9fec-eb69c5248a41" />
 
-Class Layanan memiliki satu abstract method, yaitu getKategori(), yang tidak memiliki isi di superclass dan wajib diisi oleh setiap subclass. Class Perawatan mengembalikan nilai "Perawatan" dan class Penitipan mengembalikan nilai "Penitipan". Method ini kemudian dipanggil di dalam tampilkanInfo() milik Layanan, sehingga superclass tidak perlu tahu detail bagaimana kategori ditentukan, cukup tahu bahwa method tersebut pasti tersedia di setiap subclass-nya.
+<img width="180" height="59" alt="image" src="https://github.com/user-attachments/assets/ef509c20-d0b6-4883-a9a2-8c98fcbbd957" />
+
+Class 'Layanan' memiliki satu abstract method, yaitu 'getKategori()', yang tidak memiliki isi di superclass dan wajib diisi oleh setiap subclass. Class 'Perawatan' mengembalikan nilai "Perawatan" dan class 'Penitipan' mengembalikan nilai "Penitipan". Method ini kemudian dipanggil di dalam 'tampilkanInfo()' milik 'Layanan', sehingga superclass tidak perlu tahu detail bagaimana kategori ditentukan, cukup tahu bahwa method tersebut pasti tersedia di setiap subclass-nya.
 
 ## Penerapan JDBC
 
-Pada Minpro 4 ini, program yang sebelumnya menyimpan data di ArrayList (sehingga data hilang setiap program ditutup) diintegrasikan dengan database MySQL bernama `db_kyapetcare`, menggunakan JDBC (Java Database Connectivity), PreparedStatement, dan pola DAO (Data Access Object).
+Pada Minpro 4 ini, program yang sebelumnya menyimpan data di ArrayList (sehingga data hilang setiap program ditutup) diintegrasikan dengan database MySQL bernama 'db_kyapetcare', menggunakan JDBC (Java Database Connectivity), PreparedStatement, dan pola DAO (Data Access Object).
 
 ### Koneksi Database
 
