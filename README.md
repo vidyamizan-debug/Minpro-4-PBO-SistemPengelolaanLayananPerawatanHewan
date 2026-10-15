@@ -137,65 +137,65 @@ Setiap kali DAO membaca baris dari database (lewat ResultSet), data tersebut diu
 Pada class 'CRUDKyaPetCare.java', setiap method CRUD ('tambahLayanan', 'tampilkanLayanan', 'updateLayanan', 'hapusLayanan') memanggil method yang sesuai di 'LayananDAO', kemudian hasil atau kemungkinan error-nya ditangani menggunakan blok try-catch untuk SQLException. Jika terjadi kegagalan koneksi atau query, program tidak akan menampilkan notifikasi keberhasilan, melainkan pesan error yang sesuai, sehingga tidak ada data yang dianggap berhasil tersimpan padahal sebenarnya gagal.
 
 ## Alur Program
-Alur program dimulai ketika program dijalankan melalui class `KyaPetCareMinpro4.java`, yang langsung memanggil method `jalankan()` pada class `CRUDKyaPetCare.java`. Program akan menampilkan menu utama yang berisi beberapa pilihan, yaitu Tambah Data Layanan, Tampilkan Data Layanan, Update Data Layanan, Hapus Data Layanan, dan Keluar.
+Alur program dimulai ketika program dijalankan melalui class 'KyaPetCareMinpro4.java', yang langsung memanggil method 'jalankan()' pada class 'CRUDKyaPetCare.java'. Program akan menampilkan menu utama yang berisi beberapa pilihan, yaitu Tambah Data Layanan, Tampilkan Data Layanan, Update Data Layanan, Hapus Data Layanan, dan Keluar.
 
-Pengguna memilih menu dengan memasukkan angka sesuai pilihan. Saat menambah data, pengguna cukup memilih jenis layanannya (Perawatan atau Penitipan), lalu mengisi data umum (catatan untuk petugas, harga, data hewan) serta data khusus sesuai jenisnya. Objek yang dibentuk dari input tersebut kemudian dikirim ke `LayananDAO`, yang menyimpannya ke tabel `layanan` di MySQL menggunakan `PreparedStatement`. ID layanan dibuat otomatis oleh database (AUTO_INCREMENT), sehingga pengguna tidak perlu menginputnya sendiri.
+Pengguna memilih menu dengan memasukkan angka sesuai pilihan. Saat menambah data, pengguna cukup memilih jenis layanannya (Perawatan atau Penitipan), lalu mengisi data umum (catatan untuk petugas, harga, data hewan) serta data khusus sesuai jenisnya. Objek yang dibentuk dari input tersebut kemudian dikirim ke 'LayananDAO', yang menyimpannya ke tabel 'layanan' di MySQL menggunakan 'PreparedStatement'. ID layanan dibuat otomatis oleh database (AUTO_INCREMENT), sehingga pengguna tidak perlu menginputnya sendiri.
 
-Saat menampilkan, mengupdate, atau menghapus data, `CRUDKyaPetCare` memanggil `LayananDAO` untuk mengambil data langsung dari database, bukan dari ArrayList di memori. Hal ini memastikan data yang ditampilkan selalu merupakan data terbaru yang tersimpan di MySQL, dan tetap tersedia walaupun program ditutup dan dijalankan kembali. Saat update atau hapus data, jika pengguna mengosongkan input ID, sistem akan otomatis membatalkan proses dan kembali ke menu utama tanpa mengubah data apapun di database.
+Saat menampilkan, mengupdate, atau menghapus data, 'CRUDKyaPetCare' memanggil 'LayananDAO' untuk mengambil data langsung dari database, bukan dari ArrayList di memori. Hal ini memastikan data yang ditampilkan selalu merupakan data terbaru yang tersimpan di MySQL, dan tetap tersedia walaupun program ditutup dan dijalankan kembali. Saat update atau hapus data, jika pengguna mengosongkan input ID, sistem akan otomatis membatalkan proses dan kembali ke menu utama tanpa mengubah data apapun di database.
 
 Berikut adalah dokumentasi tampilan output sistem saat program dijalankan.
 
 **1. Menu Utama**
 
-[GAMBAR: tampilan menu utama]
+<img width="171" height="129" alt="image" src="https://github.com/user-attachments/assets/c0cbee2c-1eb9-47a9-9c6d-c7c0872be74d" />
 
 Gambar di atas merupakan tampilan awal atau yang biasa disebut menu utama dari program yang telah saya rancang dan jalankan.
 
 **2. Tambah Data Layanan**
 
-[GAMBAR: submenu tambah data layanan]
+<img width="151" height="91" alt="image" src="https://github.com/user-attachments/assets/ce33d674-9c6d-450b-a77e-5ced1ec52976" />
 
 Setelah memilih menu nomor pertama, maka kita akan dialihkan ke pilihan menu untuk menambahkan jenis layanan, yaitu Perawatan atau Penitipan.
 
 * Tambah Data Layanan Perawatan
 
-[GAMBAR: proses input tambah data perawatan]
+<img width="286" height="295" alt="image" src="https://github.com/user-attachments/assets/3bbdc178-27e5-430b-98a0-89e9f064346e" />
 
-Jika memilih opsi nomor 1 (Perawatan), kita diminta mengisi formulir data umum, lalu memilih jenis perawatan (Mandi, Potong Kuku, atau Bulu). Setelah diisi, muncul notifikasi "Horee! data sudah berhasil ditambahkan dengan ID [nomor]." yang menandakan data telah tersimpan ke database, lengkap dengan ID yang dibuat otomatis oleh MySQL.
+Jika memilih opsi nomor 1 (Perawatan), kita diminta mengisi formulir data umum, lalu memilih jenis perawatan (Mandi, Potong Kuku, atau Bulu). Setelah diisi, muncul notifikasi "Horee! data sudah berhasil ditambahkan dengan ID 5." yang menandakan data telah tersimpan ke database, lengkap dengan ID yang dibuat otomatis oleh MySQL. Disini ia langsung otomatis ke ID nomor 5 dikarenakan, sebelumnya saya sudah ada mencoba untuk menambahkan data yang kemudian saya hapus dari databasenya, namun dari databasenya menganggap bahwa ID nomor 3 dan 4 itu sudah terisi. Oleh karena itu, ia mendapatkan ID nomor 5.
 
 * Tambah Data Layanan Penitipan
 
-[GAMBAR: proses input tambah data penitipan]
+<img width="285" height="194" alt="image" src="https://github.com/user-attachments/assets/c1960364-ccfc-4d8c-b84b-0124332ea863" />
 
-Jika memilih opsi nomor 2 (Penitipan), kita diminta mengisi formulir data umum, lalu memasukkan lama penitipan dalam hitungan hari. Setelah diisi, muncul notifikasi serupa yang menandakan data telah tersimpan ke database.
+Jika memilih opsi nomor 2 (Penitipan), kita diminta mengisi formulir data umum, lalu memasukkan lama penitipan dalam hitungan hari. Setelah diisi, muncul notifikasi serupa yang menandakan data telah tersimpan ke database. Setelah diisi, muncul notifikasi "Horee! data sudah berhasil ditambahkan dengan ID 6." yang menandakan data telah tersimpan ke database, lengkap dengan ID yang dibuat otomatis oleh MySQL.
 
 **3. Tampilkan Data Layanan**
 
-[GAMBAR: submenu tampilkan data layanan]
+<img width="390" height="367" alt="image" src="https://github.com/user-attachments/assets/74e4f6e8-2a44-450e-947e-03f71cdafcf3" />
 
-[GAMBAR: daftar seluruh data layanan dari database]
+<img width="246" height="333" alt="image" src="https://github.com/user-attachments/assets/35b8d535-2532-496d-9b02-c1a62c5264dc" />
 
-Jika memilih menu nomor 2 pada menu utama, sistem akan mengambil seluruh data layanan langsung dari tabel `layanan` di database MySQL dan menampilkannya, lengkap dengan kategori, informasi hewan, serta status diskon.
+Jika memilih menu nomor 2 pada menu utama, sistem akan mengambil seluruh data layanan langsung dari tabel 'layanan' di database MySQL dan menampilkannya, lengkap dengan kategori, informasi hewan, serta status diskon.
 
 **4. Update Data Layanan**
 
-[GAMBAR: proses update data]
+<img width="334" height="383" alt="image" src="https://github.com/user-attachments/assets/dff488cc-9d27-4d6a-a632-2d223ac5ca75" />
 
 Pada menu Update Data Layanan, kita diminta memasukkan ID Layanan yang ingin diubah. Sistem akan mencari data tersebut langsung ke database. Jika ditemukan, kita mengisi data baru, lalu sistem akan menjalankan proses UPDATE ke database dan menampilkan notifikasi "Horee! data sudah berhasil diupdate." beserta data terbaru.
 
 **5. Hapus Data Layanan**
 
-[GAMBAR: konfirmasi hapus - ya]
+<img width="269" height="241" alt="image" src="https://github.com/user-attachments/assets/b0fa49c7-ba3a-43a6-9c39-18f555af5a4d" />
 
 Pada menu Hapus Data Layanan, kita diminta memasukkan ID Layanan yang ingin dihapus. Setelah detail data ditampilkan, sistem meminta konfirmasi ya/tidak. Jika memilih "ya", sistem menjalankan proses DELETE ke database dan menampilkan "Data layanan berhasil dihapus!".
 
-[GAMBAR: konfirmasi hapus - tidak]
+<img width="278" height="232" alt="image" src="https://github.com/user-attachments/assets/2431c511-4f57-48e5-973b-7839ffc15763" />
 
 Jika memilih "tidak", data tidak jadi dihapus dan sistem menampilkan "Penghapusan data dibatalkan."
 
 **6. Keluar**
 
-[GAMBAR: tampilan keluar program]
+<img width="170" height="155" alt="image" src="https://github.com/user-attachments/assets/b111e1e4-4f4d-4b46-92c8-6ef860b27b55" />
 
 Jika memilih menu terakhir, maka kita akan dikeluarkan dari sistem.
 
@@ -203,42 +203,44 @@ Jika memilih menu terakhir, maka kita akan dikeluarkan dari sistem.
 
 * Input Harus Berupa Angka
 
-[GAMBAR: error input bukan angka]
+<img width="218" height="142" alt="Screenshot 2026-09-24 094039" src="https://github.com/user-attachments/assets/50e11c4d-a453-4a81-96a6-9e46bdf090cb" />
 
-Jika pengguna memasukkan input selain angka pada field yang membutuhkan angka, sistem akan menampilkan pesan error sesuai nama field tersebut, misalnya "Harga harus berupa angka!".
-
+Pada gambar di atas, dapat dilihat bahwa jika pengguna memasukkan input selain angka, maka sistem akan menampilkan "ID yang dimasukkan harus berupa angka!" untuk memastikan input yang dimasukkan valid.
+  
 * Input Harus Lebih dari 0
 
-[GAMBAR: error input angka negatif atau nol]
+<img width="231" height="65" alt="Screenshot 2026-09-24 095106" src="https://github.com/user-attachments/assets/8b24c49b-9615-463a-9395-100ff37cfceb" />
 
-Jika pengguna memasukkan angka 0 atau negatif pada field yang membutuhkan angka positif, sistem akan menampilkan pesan error sesuai nama field, misalnya "Umur Hewan harus lebih dari 0!".
+Pada gambar di atas, dapat dilihat bahwa jika pengguna memasukkan ID Layanan bernilai 0 atau diluar angka positif, maka sistem akan menampilkan "ID yang dimasukkan harus lebih dari 0!" untuk memastikan input yang dimasukkan valid.
 
 * Input Tidak Boleh Kosong
 
-[GAMBAR: error input kosong]
+<img width="164" height="130" alt="Screenshot 2026-09-24 095558" src="https://github.com/user-attachments/assets/04f3387f-f0c6-434c-b317-9f17218b0257" />
 
-Jika pengguna mengosongkan inputan data string, sistem akan menampilkan "Data tidak boleh kosong!".
+Pada gambar di atas, dapat dilihat bahwa jika pengguna mengosongkan inputan data, maka sistem akan menampilkan "Data tidak boleh kosong!" untuk memastikan input yang dimasukkan valid.
 
 * Input Min & Max Pilihan
 
-[GAMBAR: error pilihan di luar jangkauan]
+<img width="171" height="144" alt="Screenshot 2026-09-24 094917" src="https://github.com/user-attachments/assets/67b2cc55-2334-46a0-8179-896f444a653a" />
 
-Jika pengguna memasukkan angka di luar jangkauan pilihan menu, sistem akan menampilkan "Pilihan hanya [min] sampai [max]!".
+Pada gambar di atas, dapat dilihat bahwa jika pengguna memasukkan angka di luar jangkauan pilihan menu, maka sistem akan menampilkan "Pilihan hanya 1 sampai 5!" untuk memastikan input yang dimasukkan valid.
 
 * Input Harus Berupa Ya/Tidak
 
-[GAMBAR: error jawaban ya/tidak]
+<img width="281" height="233" alt="Screenshot 2026-09-24 100002" src="https://github.com/user-attachments/assets/dc186648-3a42-4c76-9e6d-2da8083cd75f" />
 
-Jika pengguna memasukkan jawaban selain "ya" atau "tidak" pada konfirmasi penghapusan, sistem akan menampilkan "Jawaban harus 'ya' atau 'tidak'!".
+Pada gambar di atas, dapat dilihat bahwa jika pengguna memasukkan jawaban selain "ya" atau "tidak" pada konfirmasi penghapusan, maka sistem akan menampilkan "Jawaban harus 'ya' atau 'tidak'!" untuk memastikan input yang dimasukkan valid.
 
 * ID Kosong saat Update/Hapus
 
-[GAMBAR: proses pembatalan karena ID dikosongkan]
+<img width="251" height="68" alt="image" src="https://github.com/user-attachments/assets/60071f03-7055-4366-bfbf-1948751e7ae0" />
+<br><br>
+<img width="251" height="68" alt="image" src="https://github.com/user-attachments/assets/5b1a7a40-1a33-4cfd-9f0c-2dee25db036d" />
 
 Jika pengguna mengosongkan input ID pada menu Update atau Hapus, sistem akan langsung membatalkan proses dan menampilkan "Dibatalkan, kembali ke menu." tanpa mengubah data apapun di database.
 
 * Koneksi atau Query Database Gagal
 
-[GAMBAR: pesan error saat koneksi/query gagal]
+<img width="230" height="196" alt="image" src="https://github.com/user-attachments/assets/c9b64323-6a2c-4f09-885e-a86caeb607ab" />
 
-Jika koneksi ke database gagal (misalnya MySQL belum dinyalakan, database tidak ditemukan, atau username/password salah) maupun ada kesalahan saat menjalankan query, sistem tidak langsung crash, melainkan menampilkan pesan error yang jelas, misalnya "Gagal mengambil data dari database: [pesan error]", dan tidak menampilkan notifikasi keberhasilan apapun.
+Jika koneksi ke database gagal (misalnya MySQL belum dinyalakan, database tidak ditemukan, atau username/password salah) maupun ada kesalahan saat menjalankan query, sistem tidak langsung crash, melainkan menampilkan pesan error yang jelas dan tidak menampilkan notifikasi keberhasilan apapun.
