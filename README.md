@@ -55,15 +55,15 @@ Setiap atribut yang boleh diubah memiliki getter dan setter, sehingga perubahan 
 ### Inheritance
 Inheritance diterapkan pada class yang berada di package model.
 
-[GAMBAR: potongan kode abstract class Layanan beserta atributnya]
+<img width="207" height="124" alt="image" src="https://github.com/user-attachments/assets/c03d94bd-2fd4-411d-a7b5-1276674cc91c" />
 
-Seperti yang dapat dilihat pada gambar di atas, class Layanan merupakan superclass yang menyimpan atribut umum (idLayanan, namaLayanan, catatan, harga) beserta data hewan terkait (namaHewan, namaPemilik, jenisHewan, umurHewan).
+Seperti yang dapat dilihat pada gambar di atas, class 'Layanan' merupakan superclass yang menyimpan atribut umum ('idLayanan', 'namaLayanan', 'catatan', 'harga') beserta data hewan terkait ('namaHewan', 'namaPemilik', 'jenisHewan', 'umurHewan').
 
-[GAMBAR: potongan kode class Perawatan extends Layanan]
+<img width="679" height="68" alt="image" src="https://github.com/user-attachments/assets/67fc6356-9bf6-4864-817e-2cfa3d522894" />
 
-[GAMBAR: potongan kode class Penitipan extends Layanan]
+<img width="676" height="95" alt="image" src="https://github.com/user-attachments/assets/c7d9d34c-f941-432c-b6d2-15ca06547692" />
 
-Kedua gambar di atas menunjukkan bahwa class Perawatan dan Penitipan merupakan subclass yang menggunakan extends Layanan, sehingga mewarisi seluruh atribut dan method dari Layanan, ditambah atribut khusus milik Penitipan, yaitu lamaPenitipan. Kedua subclass tersebut memanggil constructor superclass menggunakan super(...) untuk mengisi atribut umum sebelum mengisi atribut khususnya sendiri (jika ada).
+Kedua gambar di atas menunjukkan bahwa class 'Perawatan' dan 'Penitipan' merupakan subclass yang menggunakan "extends Layanan", sehingga mewarisi seluruh atribut dan method dari 'Layanan', ditambah atribut khusus milik 'Penitipan', yaitu 'lamaPenitipan'. Kedua subclass tersebut memanggil constructor superclass menggunakan super(...) untuk mengisi atribut umum sebelum mengisi atribut khususnya sendiri.
 
 ## Penerapan Polymorphism dan Abstraction
 
